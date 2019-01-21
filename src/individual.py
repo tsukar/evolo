@@ -26,14 +26,14 @@ class Individual:
             elif section_name == '[maxpool]':
                 layers.append(MaxPoolLayer(section))
             elif section_name == '[route]':
-                layers.append(ConcatLayer(target_sections[i:(i + 3)], i))
+                layers.append(ConcatLayer(target_sections[i:(i + 4)], i))
                 i += 3
             i += 1
 
         return layers
 
     def export_layers(self):
-        sections = self.sections[:23]
+        sections = self.sections[:24]
         for layer in self.layers:
             if hasattr(layer, 'section'):
                 sections.append(layer.section)
