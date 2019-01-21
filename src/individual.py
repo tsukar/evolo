@@ -1,6 +1,6 @@
-import section
-import simple_layer
-import bypass_layer
+from src.section import Section
+from src.simple_layer import ConvLayer, MaxPoolLayer
+from src.bypass_layer import ConcatLayer
 
 class Individual:
     def __init__(self, sections):
