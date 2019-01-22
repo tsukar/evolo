@@ -1,3 +1,4 @@
+import random
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer
 from src.bypass_layer import ConcatLayer
@@ -46,7 +47,9 @@ class Individual:
         return 'model.cfg'
 
     def add_convolution(self):
-        pass
+        conv_layer = ConvLayer.create()
+        position = random.randrange(len(self.layers) + 1)
+        self.layers.insert(position, conv_layer)
 
     def remove_convolution(self):
         pass
