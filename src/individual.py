@@ -45,6 +45,51 @@ class Individual:
     def get_filename(self):
         return 'model.cfg'
 
+    def add_convolution(self):
+        pass
+
+    def remove_convolution(self):
+        pass
+
+    def alter_channel_number(self):
+        pass
+
+    def alter_filter_size(self):
+        pass
+
+    def alter_stride(self):
+        pass
+
+    def add_dropout(self):
+        pass
+
+    def remove_dropout(self):
+        pass
+
+    def add_pooling(self):
+        pass
+
+    def remove_pooling(self):
+        pass
+
+    def add_skip(self):
+        pass
+
+    def remove_skip(self):
+        pass
+
+    def add_concatenate(self):
+        pass
+
+    def remove_concatenate(self):
+        pass
+
+    def add_fully_connected(self):
+        pass
+
+    def remove_fully_connected(self):
+        pass
+
     @classmethod
     def load(cls, path_to_cfg_file):
         sections = []
