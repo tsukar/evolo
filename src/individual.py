@@ -54,13 +54,30 @@ class Individual:
                 return False
         return True
 
+    def sample_layer_by_name(self, class_name):
+        candidates = [l for l in self.layers if l.class_name == class_name]
+        if candidates:
+            chosen = random.choice(candidates)
+        else:
+            chosen = None
+        return chosen
+
+    def remove_layer_by_name(self, class_name):
+        chosen = self.sample_layer_by_name(class_name)
+        if not chosen:
+            return False
+        else:
+            chosen_index = self.layers.index(chosen)
+            self.layers.pop(chosen_index)
+            return True
+
     def add_convolution(self):
         conv_layer = ConvLayer.create()
         position = random.randrange(len(self.layers) + 1)
         self.layers.insert(position, conv_layer)
 
     def remove_convolution(self):
-        pass
+        return self.remove_layer_by_name('ConvLayer')
 
     def alter_channel_number(self):
         pass
@@ -83,7 +100,7 @@ class Individual:
         self.layers.insert(position, maxpool_layer)
 
     def remove_pooling(self):
-        pass
+        return self.remove_layer_by_name('MaxPoolLayer')
 
     def add_skip(self):
         pass
