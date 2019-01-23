@@ -46,6 +46,14 @@ class Individual:
     def get_filename(self):
         return 'model.cfg'
 
+    def is_valid(self):
+        h, w, c = 13, 13, 1024
+        for layer in self.layers:
+            h, w, c = layer.get_output_size(h, w, c)
+            if h == 0 or w == 0 or c == 0:
+                return False
+        return True
+
     def add_convolution(self):
         conv_layer = ConvLayer.create()
         position = random.randrange(len(self.layers) + 1)
