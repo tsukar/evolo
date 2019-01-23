@@ -1,0 +1,6 @@
+classes= 3
+train  = data/x-ray/train/train.txt
+valid  = data/x-ray/test/test.txt
+names = data/x-ray.names
+backup = backup
+
