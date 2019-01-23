@@ -80,13 +80,28 @@ class Individual:
         return self.remove_layer_by_name('ConvLayer')
 
     def alter_channel_number(self):
-        pass
+        chosen = self.sample_layer_by_name('ConvLayer')
+        if not chosen:
+            return False
+        else:
+            chosen.section.params['filters'] = random.choice([512, 1024, 2048])
+            return True
 
     def alter_filter_size(self):
-        pass
+        chosen = self.sample_layer_by_name('ConvLayer')
+        if not chosen:
+            return False
+        else:
+            chosen.section.params['size'] = random.choice([1, 3, 5])
+            return True
 
     def alter_stride(self):
-        pass
+        chosen = self.sample_layer_by_name('ConvLayer')
+        if not chosen:
+            return False
+        else:
+            chosen.section.params['stride'] = random.choice([1, 2])
+            return True
 
     def add_dropout(self):
         pass
