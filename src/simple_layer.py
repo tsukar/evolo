@@ -35,3 +35,10 @@ class MaxPoolLayer(SimpleLayer):
         out_w = int((in_w - size) / stride + 1)
         out_c = in_c
         return out_h, out_w, out_c
+
+    @classmethod
+    def create(cls):
+        maxpool_section = Section('[maxpool]')
+        maxpool_section.params['size'] = '2'
+        maxpool_section.params['stride'] = '2'
+        return MaxPoolLayer(maxpool_section)

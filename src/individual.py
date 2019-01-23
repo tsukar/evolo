@@ -78,7 +78,9 @@ class Individual:
         pass
 
     def add_pooling(self):
-        pass
+        maxpool_layer = MaxPoolLayer.create()
+        position = random.randrange(len(self.layers) + 1)
+        self.layers.insert(position, maxpool_layer)
 
     def remove_pooling(self):
         pass
