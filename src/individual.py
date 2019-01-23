@@ -2,7 +2,7 @@ import random
 import copy
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer
-from src.bypass_layer import ConcatLayer
+from src.bypass_layer import ConcatLayer, SkipLayer
 
 class Individual:
     def __init__(self, sections):
@@ -126,10 +126,13 @@ class Individual:
         return self.remove_layer_by_name('MaxPoolLayer')
 
     def add_skip(self):
-        pass
+        skip_layer = SkipLayer.create()
+        position = random.randrange(len(self.layers) + 1)
+        self.layers.insert(position, skip_layer)
+        return True
 
     def remove_skip(self):
-        pass
+        return self.remove_layer_by_name('SkipLayer')
 
     def add_concatenate(self):
         concat_layer = ConcatLayer.create()
