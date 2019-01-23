@@ -103,6 +103,36 @@ class Individual:
     def remove_fully_connected(self):
         pass
 
+    def mutate(self):
+        operations = [
+            self.add_convolution,
+            self.remove_convolution,
+            self.alter_channel_number,
+            self.alter_filter_size,
+            self.alter_stride,
+            self.add_dropout,
+            self.remove_dropout,
+            self.add_pooling,
+            self.remove_pooling,
+            self.add_skip,
+            self.remove_skip,
+            self.add_concatenate,
+            self.remove_concatenate,
+            self.add_fully_connected,
+            self.remove_fully_connected
+        ]
+        operation_weights = [
+            2, 1, 2, 2, 2,
+            1, 1, 1, 1, 2,
+            1, 2, 1, 1, 1
+        ]
+
+        is_success = False
+        while is_success == False:
+            selected_operation = random.choices(operations, k=1, weights=operation_weights)[0]
+            if selected_operation():
+                is_success = self.is_valid()
+
     @classmethod
     def load(cls, path_to_cfg_file):
         sections = []
