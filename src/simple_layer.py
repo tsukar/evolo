@@ -45,3 +45,13 @@ class MaxPoolLayer(SimpleLayer):
         maxpool_section.params['size'] = '2'
         maxpool_section.params['stride'] = '2'
         return MaxPoolLayer(maxpool_section)
+
+class DropoutLayer(SimpleLayer):
+    def get_output_size(self, in_h, in_w, in_c):
+        return in_h, in_w, in_c
+
+    @classmethod
+    def create(cls):
+        dropout_section = Section('[dropout]')
+        dropout_section.params['probability'] = '.5'
+        return DropoutLayer(dropout_section)

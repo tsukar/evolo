@@ -1,7 +1,7 @@
 import random
 import copy
 from src.section import Section
-from src.simple_layer import ConvLayer, MaxPoolLayer
+from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer
 from src.bypass_layer import ConcatLayer
 
 class Individual:
@@ -108,10 +108,13 @@ class Individual:
             return True
 
     def add_dropout(self):
-        pass
+        dropout_layer = DropoutLayer.create()
+        position = random.randrange(len(self.layers) + 1)
+        self.layers.insert(position, dropout_layer)
+        return True
 
     def remove_dropout(self):
-        pass
+        return self.remove_layer_by_name('DropoutLayer')
 
     def add_pooling(self):
         maxpool_layer = MaxPoolLayer.create()
