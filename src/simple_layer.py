@@ -4,6 +4,9 @@ class SimpleLayer:
     def __init__(self, section):
         self.section = section
 
+    def get_name(self):
+        return self.__class__.__name__
+
 class ConvLayer(SimpleLayer):
     def get_output_size(self, in_h, in_w, in_c):
         size = int(self.section.params['size'])

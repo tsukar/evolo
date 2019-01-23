@@ -56,16 +56,16 @@ class Individual:
                 return False
         return True
 
-    def sample_layer_by_name(self, class_name):
-        candidates = [l for l in self.layers if l.class_name == class_name]
+    def sample_layer_by_name(self, name):
+        candidates = [l for l in self.layers if l.get_name == name]
         if candidates:
             chosen = random.choice(candidates)
         else:
             chosen = None
         return chosen
 
-    def remove_layer_by_name(self, class_name):
-        chosen = self.sample_layer_by_name(class_name)
+    def remove_layer_by_name(self, name):
+        chosen = self.sample_layer_by_name(name)
         if not chosen:
             return False
         else:

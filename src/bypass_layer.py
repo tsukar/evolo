@@ -6,6 +6,9 @@ class BypassLayer:
         self.sections = sections
         self.source_index = source_index
 
+    def get_name(self):
+        return self.__class__.__name__
+
 class ConcatLayer(BypassLayer):
     def get_output_size(self, in_h, in_w, in_c):
         source_h, source_w, _ = self.get_source_size(self.source_index)
