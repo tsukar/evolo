@@ -27,7 +27,7 @@ class ConcatLayer(BypassLayer):
         else:
             return 0, 0, 0
 
-        self.sections[2].params['stride'] = stride
+        self.sections[2].params['stride'] = str(stride)
         return out_h, out_w, out_c
 
     def get_source_size(self, source_index):
