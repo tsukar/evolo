@@ -1,3 +1,4 @@
+import random
 from src.section import Section
 
 class SimpleLayer:
@@ -55,3 +56,15 @@ class DropoutLayer(SimpleLayer):
         dropout_section = Section('[dropout]')
         dropout_section.params['probability'] = '.5'
         return DropoutLayer(dropout_section)
+
+class ConnectedLayer(SimpleLayer):
+    def get_output_size(self, in_h, in_w, in_c):
+        return 1, 1, int(self.section.params['output'])
+
+    @classmethod
+    def create(cls):
+        connected_section = Section('[connected]')
+        dim = random.choice([50, 100, 150, 200])
+        connected_section.params['output'] = str(dim)
+        connected_section.params['activation'] = 'relu'
+        return ConnectedLayer(connected_section)

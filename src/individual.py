@@ -1,7 +1,7 @@
 import random
 import copy
 from src.section import Section
-from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer
+from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer, ConnectedLayer
 from src.bypass_layer import ConcatLayer, SkipLayer
 
 class Individual:
@@ -144,10 +144,12 @@ class Individual:
         return self.remove_layer_by_name('ConcatLayer')
 
     def add_fully_connected(self):
-        pass
+        connected_layer = ConnectedLayer.create()
+        self.layers.append(connected_layer)
+        return True
 
     def remove_fully_connected(self):
-        pass
+        return self.remove_layer_by_name('ConnectedLayer')
 
     def mutate(self):
         operations = [
