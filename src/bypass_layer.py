@@ -10,11 +10,21 @@ class ConcatLayer(BypassLayer):
     def get_output_size(self, in_h, in_w, in_c):
         source_h, source_w, _ = self.get_source_size(self.source_index)
         source_c = int(self.sections[1].params['filters'])
-        stride = int(self.sections[2].params['stride'])
+        if source_h % in_h == 0:
+            stride = int(source_h / in_h)
+            out_h = int(source_h / stride)
+            out_w = int(source_w / stride)
+            out_c = int(source_c * (stride ** 2) + in_c)
+        elif in_h % source_h == 0:
+            stride = int(in_h / source_h)
+            out_h = int(source_h * stride)
+            out_w = int(source_w * stride)
+            out_c = int(source_c / (stride ** 2) + in_c)
+            self.sections[2].params['reverse'] = '1'
+        else:
+            return 0, 0, 0
 
-        out_h = int(source_h / stride)
-        out_w = int(source_w / stride)
-        out_c = int(source_c * (stride ** 2) + in_c)
+        self.sections[2].params['stride'] = stride
         return out_h, out_w, out_c
 
     def get_source_size(self, source_index):
