@@ -1,4 +1,5 @@
 import random
+import copy
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer
 from src.bypass_layer import ConcatLayer
@@ -167,10 +168,13 @@ class Individual:
         ]
 
         is_success = False
+        layers_backup = copy.deepcopy(self.layers)
         while is_success == False:
+            self.layers = copy.deepcopy(layers_backup)
             selected_operation = random.choices(operations, k=1, weights=operation_weights)[0]
             if selected_operation():
                 is_success = self.is_valid()
+        return self
 
     @classmethod
     def load(cls, path_to_cfg_file):
