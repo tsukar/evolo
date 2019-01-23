@@ -77,6 +77,7 @@ class Individual:
         conv_layer = ConvLayer.create()
         position = random.randrange(len(self.layers) + 1)
         self.layers.insert(position, conv_layer)
+        return True
 
     def remove_convolution(self):
         return self.remove_layer_by_name('ConvLayer')
@@ -115,6 +116,7 @@ class Individual:
         maxpool_layer = MaxPoolLayer.create()
         position = random.randrange(len(self.layers) + 1)
         self.layers.insert(position, maxpool_layer)
+        return True
 
     def remove_pooling(self):
         return self.remove_layer_by_name('MaxPoolLayer')
@@ -129,6 +131,7 @@ class Individual:
         concat_layer = ConcatLayer.create()
         position = random.randrange(len(self.layers) + 1)
         self.layers.insert(position, concat_layer)
+        return True
 
     def remove_concatenate(self):
         pass
