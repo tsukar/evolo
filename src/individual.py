@@ -134,7 +134,7 @@ class Individual:
         return True
 
     def remove_concatenate(self):
-        pass
+        return self.remove_layer_by_name('ConcatLayer')
 
     def add_fully_connected(self):
         pass
