@@ -27,7 +27,8 @@ class Individual:
             elif section_name == '[maxpool]':
                 layers.append(MaxPoolLayer(section))
             elif section_name == '[route]':
-                layers.append(ConcatLayer(target_sections[i:(i + 4)], i))
+                source_index = 23 + i + int(target_sections[i].params['layers'])
+                layers.append(ConcatLayer(target_sections[i:(i + 4)], source_index))
                 i += 3
             i += 1
 
@@ -39,6 +40,7 @@ class Individual:
             if hasattr(layer, 'section'):
                 sections.append(layer.section)
             elif hasattr(layer, 'sections'):
+                layer.sections[0].params['layers'] = str(layer.source_index - len(sections) + 1)
                 sections.extend(layer.sections)
         sections.extend(self.sections[-2:])
         return sections
@@ -124,7 +126,9 @@ class Individual:
         pass
 
     def add_concatenate(self):
-        pass
+        concat_layer = ConcatLayer.create()
+        position = random.randrange(len(self.layers) + 1)
+        self.layers.insert(position, concat_layer)
 
     def remove_concatenate(self):
         pass

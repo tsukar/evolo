@@ -1,7 +1,10 @@
+import random
+from src.section import Section
+
 class BypassLayer:
-    def __init__(self, sections, current_index):
+    def __init__(self, sections, source_index):
         self.sections = sections
-        self.source_index = current_index + int(sections[0].params['layers'])
+        self.source_index = source_index
 
 class ConcatLayer(BypassLayer):
     def get_output_size(self, in_h, in_w, in_c):
@@ -38,7 +41,28 @@ class ConcatLayer(BypassLayer):
             (13, 13, 512),
             (13, 13, 1024),
             (13, 13, 512),
-            (13, 13, 1024),
             (13, 13, 1024)
         ]
         return source_sizes[source_index]
+
+    @classmethod
+    def create(cls):
+        concat_sections = [
+            Section('[route]'),
+            Section('[convolutional]'),
+            Section('[reorg]'),
+            Section('[route]'),
+        ]
+
+        concat_sections[0].params['layers'] = None
+        concat_sections[1].params['batch_normalize'] = '1'
+        concat_sections[1].params['size'] = '1'
+        concat_sections[1].params['stride'] = '1'
+        concat_sections[1].params['pad'] = '1'
+        concat_sections[1].params['filters'] = '64'
+        concat_sections[1].params['activation'] = 'leaky'
+        concat_sections[2].params['stride'] = '2'
+        concat_sections[3].params['layers'] = '-1,-4'
+
+        source_index = random.randrange(23)
+        return ConcatLayer(concat_sections, source_index)
