@@ -49,7 +49,7 @@ class Individual:
         return sections
 
     def get_filename(self):
-        return f'{self.gen.zfill(2)}-{self.id.zfill(2)}.cfg'
+        return f'individuals/{self.gen.zfill(2)}-{self.id.zfill(2)}.cfg'
 
     def is_valid(self):
         h, w, c = 13, 13, 1024

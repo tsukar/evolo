@@ -11,3 +11,6 @@ __pycache__/
 # Weights backup files
 /backup/*
 !/backup/.keep
+
+# Emerging individual files
+/individuals/*.cfg
