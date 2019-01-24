@@ -7,3 +7,7 @@ __pycache__/
 # Dataset image files
 /data/x-ray/train/*.jpg
 /data/x-ray/test/*.jpg
+
+# Weights backup files
+/backup/*
+!/backup/.keep
