@@ -5,9 +5,11 @@ from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer, ConnectedLay
 from src.bypass_layer import ConcatLayer, SkipLayer
 
 class Individual:
-    def __init__(self, sections):
+    def __init__(self, sections, gen, id):
         self.sections = sections
         self.layers = self.import_layers()
+        self.gen = gen
+        self.id = id
 
     def save(self):
         self.sections = self.export_layers()
@@ -47,7 +49,7 @@ class Individual:
         return sections
 
     def get_filename(self):
-        return 'model.cfg'
+        return f'{self.gen.zfill(2)}-{self.id.zfill(2)}.cfg'
 
     def is_valid(self):
         h, w, c = 13, 13, 1024
@@ -185,7 +187,7 @@ class Individual:
         return self
 
     @classmethod
-    def load(cls, path_to_cfg_file):
+    def load(cls, path_to_cfg_file, gen, id):
         sections = []
         with open(path_to_cfg_file) as f:
             for line in f:
@@ -196,4 +198,4 @@ class Individual:
                     sections.append(Section(line))
                 else:
                     sections[-1].add_entry(line)
-        return Individual(sections)
+        return Individual(sections, gen, id)
