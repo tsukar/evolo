@@ -238,6 +238,10 @@ class Individual:
     def get_score(self):
         return self.score
 
+    def set_score(self, score):
+        self.score = score
+        return self.score
+
     def populate(self):
         filename = self.get_filename()
         weights_filename = filename.replace('individuals', 'backup').replace('.cfg', '') + '_final.weights'
