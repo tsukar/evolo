@@ -207,6 +207,13 @@ class Individual:
         self.score = score
         return score
 
+    def populate(self):
+        for i in range(4):
+            ind = Individual.load(self.get_filename(), self.gen + 1, i)
+            if i > 0:
+                ind.mutate()
+            ind.save()
+
     @classmethod
     def load(cls, path_to_cfg_file, gen, id):
         sections = []
