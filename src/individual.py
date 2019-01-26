@@ -1,5 +1,7 @@
 import random
 import copy
+import re
+import subprocess
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer, ConnectedLayer
 from src.bypass_layer import ConcatLayer, SkipLayer
@@ -10,6 +12,7 @@ class Individual:
         self.layers = self.import_layers()
         self.gen = gen
         self.id = id
+        self.score = 0.0
 
     def save(self):
         self.sections = self.export_layers()
@@ -188,6 +191,21 @@ class Individual:
             if selected_operation():
                 is_success = self.is_valid()
         return self
+
+    def evaluate(self):
+        filename = self.get_filename()
+        weights_filename = filename.replace('individuals', 'backup').replace('.cfg', '') + '_final.weights'
+        proc = subprocess.run([
+            './darknet',
+            'detector',
+            'map',
+            'cfg/x-ray.data',
+            filename,
+            weights_filename
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        score = float(re.search(r'mean average precision \(mAP\) = (0\.\d+), ', proc.stdout.decode('utf8')).group(1))
+        self.score = score
+        return score
 
     @classmethod
     def load(cls, path_to_cfg_file, gen, id):
