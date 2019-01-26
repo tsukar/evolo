@@ -2,6 +2,7 @@ import random
 import copy
 import re
 import subprocess
+import shutil
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer, ConnectedLayer
 from src.bypass_layer import ConcatLayer, SkipLayer
@@ -226,6 +227,10 @@ class Individual:
         return self.score
 
     def populate(self):
+        filename = self.get_filename()
+        weights_filename = filename.replace('individuals', 'backup').replace('.cfg', '') + '_final.weights'
+        padded_gen = str(self.gen).zfill(2)
+        shutil.copyfile(weights_filename, f'{padded_gen}_best.weights')
         for i in range(4):
             ind = Individual.load(self.get_filename(), self.gen + 1, i)
             if i > 0:
