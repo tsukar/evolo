@@ -3,6 +3,7 @@ import copy
 import re
 import subprocess
 import shutil
+import os
 from src.section import Section
 from src.simple_layer import ConvLayer, MaxPoolLayer, DropoutLayer, ConnectedLayer
 from src.bypass_layer import ConcatLayer, SkipLayer
@@ -245,6 +246,9 @@ class Individual:
     def populate(self):
         filename = self.get_filename()
         weights_filename = filename.replace('individuals', 'backup').replace('.cfg', '') + '_final.weights'
+        if not os.path.isfile(weights_filename):
+            padded_parent_gen = str(self.gen - 1).zfill(2)
+            weights_filename = f'{padded_parent_gen}_best.weights'
         padded_gen = str(self.gen).zfill(2)
         shutil.copyfile(weights_filename, f'{padded_gen}_best.weights')
         for i in range(4):
