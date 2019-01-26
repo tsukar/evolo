@@ -218,6 +218,9 @@ class Individual:
         self.score = score
         return score
 
+    def get_score(self):
+        return self.score
+
     def populate(self):
         for i in range(4):
             ind = Individual.load(self.get_filename(), self.gen + 1, i)
