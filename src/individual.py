@@ -214,7 +214,11 @@ class Individual:
             filename,
             weights_filename
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        score = float(re.search(r'mean average precision \(mAP\) = (0\.\d+), ', proc.stdout.decode('utf8')).group(1))
+        match = re.search(r'mean average precision \(mAP\) = (0\.\d+), ', proc.stdout.decode('utf8'))
+        if match:
+            score = float(match.group(1))
+        else:
+            score = 0.0
         self.score = score
         return score
 
