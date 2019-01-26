@@ -9,6 +9,7 @@ from src.bypass_layer import ConcatLayer, SkipLayer
 class Individual:
     def __init__(self, sections, gen, id):
         self.sections = sections
+        self.sections[0].params['max_batches '] = str(self.get_adaptive_max_batches(gen))
         self.layers = self.import_layers()
         self.gen = gen
         self.id = id
@@ -55,6 +56,16 @@ class Individual:
         padded_gen = str(self.gen).zfill(2)
         padded_id = str(self.id).zfill(2)
         return f'individuals/{padded_gen}-{padded_id}.cfg'
+
+    def get_adaptive_max_batches(self, gen):
+        if gen == 0:
+            return 10000
+        elif gen == 1:
+            return 15000
+        elif gen == 2:
+            return 20000
+        elif gen == 3:
+            return 25000
 
     def is_valid(self):
         h, w, c = 13, 13, 1024
