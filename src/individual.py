@@ -204,6 +204,18 @@ class Individual:
                 is_success = self.is_valid()
         return self
 
+    def train(self):
+        padded_gen = str(self.gen - 1).zfill(2)
+        weights_filename = f'{padded_gen}_best.weights'
+        subprocess.run([
+            './darknet',
+            'detector',
+            'train',
+            'cfg/x-ray.data',
+            self.get_filename(),
+            weights_filename
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
     def evaluate(self):
         filename = self.get_filename()
         weights_filename = filename.replace('individuals', 'backup').replace('.cfg', '') + '_final.weights'
