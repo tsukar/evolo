@@ -206,15 +206,13 @@ class Individual:
         return self
 
     def train(self):
-        padded_gen = str(self.gen - 1).zfill(2)
-        weights_filename = f'{padded_gen}_best.weights'
         subprocess.run([
             './darknet',
             'detector',
             'train',
             'cfg/x-ray.data',
             self.get_filename(),
-            weights_filename
+            'darknet19_448.conv.23'
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return self
 
