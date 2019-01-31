@@ -216,6 +216,7 @@ class Individual:
             self.get_filename(),
             weights_filename
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return self
 
     def evaluate(self):
         filename = self.get_filename()
