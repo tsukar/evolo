@@ -13,9 +13,9 @@ Evolutionary YOLO
 Clone this repository and [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet), respectively.
 
 ```
-git clone https://github.com/tsukar/evolo.git
-git clone https://github.com/AlexeyAB/darknet.git
-cd darknet/
+$ git clone https://github.com/tsukar/evolo.git
+$ git clone https://github.com/AlexeyAB/darknet.git
+$ cd darknet/
 ```
 
 Edit the `Makefile` so that you can use your GPU.
@@ -49,6 +49,12 @@ Just `make` and copy the compiled binary into the root directory of this reposit
 $ make
 $ cp darknet ../evolo/
 $ cd ../evolo/
+```
+
+Download the pre-trained weights from YOLOv2 official site.
+
+```
+$ wget https://pjreddie.com/media/files/darknet19_448.conv.23
 ```
 
 Run Jupyter Notebook and open `evolution.ipynb` to start evolution.
