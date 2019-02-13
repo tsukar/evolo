@@ -57,10 +57,10 @@ Download the pre-trained weights from YOLOv2 official site.
 $ wget https://pjreddie.com/media/files/darknet19_448.conv.23
 ```
 
-Run Jupyter Notebook and open `evolution.ipynb` to start evolution.
+Run Jupyter Notebook and open `evolution.ipynb` -> `Run All` to start evolution.
 
 ```
 $ jupyter notebook
 ```
 
-After evolution, open `evaluation.ipynb` for evaluation.
+After evolution, open `evaluation.ipynb` -> `Run All` for evaluation.
