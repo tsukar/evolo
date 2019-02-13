@@ -57,6 +57,8 @@ Download the pre-trained weights from YOLOv2 official site.
 $ wget https://pjreddie.com/media/files/darknet19_448.conv.23
 ```
 
+Download [train.zip](https://drive.google.com/open?id=12wEAyNHoxt-rBUEZZH0ym9OGuxGWAXBX) and [test.zip](https://drive.google.com/open?id=1rmph2beAowAkuGkUzykH9i8YR9gFKFGB) (currently not available - please contact me at `tsukada [at] iba.t.u-tokyo.ac.jp` if you need them). Put the decompressed `*.jpg` files in `data/x-ray/train/`, `data/x-ray/test/`, respectively.
+
 Run Jupyter Notebook and open `evolution.ipynb` -> `Run All` to start evolution.
 
 ```
